@@ -1,0 +1,10 @@
+[package]
+name = "icedragon-utils-rs"
+version = "0.1.0"
+authors = ["icedragon <flyingicedragon@outlook.com>"]
+edition = "2024"
+description = "Personal utils of icedragon."
+license = "GPL-3.0-or-later"
+repository = "https://github.com/flyingicedragon/icedragon-utils-rs"
+
+[dependencies]
