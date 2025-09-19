@@ -43,9 +43,10 @@ impl Key {
     /// `true` if license is valid; `false` otherwise
     pub fn check(&self, software: &str) -> bool {
         let home_dir = env::var("HOME").unwrap_or(String::from("/home/icedragon"));
-        let key_path = PathBuf::from(home_dir + ".icedragon_key");
+        let key_path = PathBuf::from(home_dir + "/.icedragon_key");
         let file_key: usize = fs::read_to_string(key_path)
             .unwrap_or_default()
+            .trim()
             .parse()
             .unwrap_or_default();
         if file_key != self.file_key {
@@ -76,5 +77,16 @@ impl Key {
             "alphafold_toolkit" => self.time_key.alphafold_toolkit,
             _ => 0,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_key_check() {
+        let key = Key::new();
+        assert!(key.check("alphafold_toolkit"));
     }
 }
